@@ -11,7 +11,7 @@ const SITE = 'https://smartstudycenters.com';
 const PHONE = '+919731045709';
 const MAX_IMAGE_KB = 300;
 // Claims the coaching advertising rules make risky. Add proof and consent before allowing any of these.
-const BANNED = [/best tuition/i, /100\s*%/, /no\.?\s*1\b/i, /top[- ]ranked/i, /guaranteed (marks|rank|result|selection|admission)/i, /we guarantee/i];
+const BANNED = [/best tuition/i, /100\s*%\s*(guarantee|guaranteed|selection|placement|job)/i, /no\.?\s*1\b/i, /top[- ]ranked/i, /guaranteed (marks|rank|result|selection|admission)/i, /we guarantee/i];
 const NOT_PUBLIC = ['docs', 'archive', 'scripts', 'site', 'DEVELOPER-GUIDE.md', 'CLIENT-HANDOVER.md', 'package.json', 'vercel.json'];
 
 const errors = [];

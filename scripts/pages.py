@@ -6,6 +6,11 @@ OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path
 SITE = 'https://smartstudycenters.com'   # change here if the client's domain differs
 TEL = '<a href="tel:+919731045709">097310 45709</a>'
 MAP = 'https://maps.google.com/?cid=1450289958892343616'
+IG = 'https://www.instagram.com/smart.tutorials_/'
+EMAIL = 'sandya.raksha11@gmail.com'
+MAIL = f'<a href="mailto:{EMAIL}">{EMAIL}</a>'
+HOURS = 'Mon – Sat, 10:00 AM – 9:00 PM'
+GA_ID = ''   # paste the Google Analytics 4 measurement ID here, e.g. 'G-ABC123XYZ'. Empty = no analytics.
 WA = 'https://wa.me/919731045709?text=Hi%2C%20I%20would%20like%20to%20know%20about%20tuition%20classes'
 ic = lambda n, cls='i': f'<svg class="{cls}" aria-hidden="true"><use href="assets/icons.svg#{n}"/></svg>'
 wa = '<svg aria-hidden="true"><use href="assets/icons.svg#wa"/></svg>'
@@ -13,6 +18,7 @@ wa = '<svg aria-hidden="true"><use href="assets/icons.svg#wa"/></svg>'
 def head(title, desc, path, extra='', index=True):
     canon = f'<link rel="canonical" href="{SITE}/{path}">\n' if index else ''
     robots = 'index, follow, max-image-preview:large' if index else 'noindex'
+    ga_meta = f'<meta name="ga-id" content="{GA_ID}">\n' if GA_ID else ''
     return f'''<!doctype html>
 <html lang="en-IN">
 <head>
@@ -21,6 +27,7 @@ def head(title, desc, path, extra='', index=True):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#1b2a5c">
+{ga_meta}
 <meta name="robots" content="{robots}">
 {canon}<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -53,10 +60,11 @@ def header(home):
   <div class="container">
     <div class="left">
       <a href="tel:+919731045709">{ic('phone')}097310 45709</a>
-      <span class="hide-m">{ic('clock')}10:00 AM – 10:00 PM</span>
+      <span class="hide-m">{ic('clock')}{HOURS}</span>
       <span class="hide-m">{ic('pin')}Vijayanagar II Stage, Bengaluru</span>
     </div>
     <div class="social">
+      <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram (opens in a new tab)">{ic('ig')}</a>
       <a href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp (opens in a new tab)">{wa}</a>
     </div>
   </div>
@@ -65,14 +73,14 @@ def header(home):
 <header id="hdr">
   <div class="container">
     <a href="{p}#home" class="logo">
-      <span class="mark" aria-hidden="true">ST</span>
-      <span><span class="name">SMART <span>TUTORIALS</span></span><small>Today a reader, Tomorrow a Leader</small></span>
+      <span class="mark" aria-hidden="true"></span>
+      <span><span class="name">Smart <span>Tutorials</span></span><small>Gather to learn and grow</small></span>
     </a>
     <nav class="main" aria-label="Main">
       {main_links}
       <a href="{p}#enquiry" class="btn btn-red">Enquire Now</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mnav">{ic('menu')}</button>
+    <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav">{ic('menu')}</button>
   </div>
   <div class="m-nav" id="mnav">
     {m_links}
@@ -83,6 +91,7 @@ def header(home):
 
 def footer(home):
     p = '' if home else './'
+    cookie_link = ' · <button type="button" class="cookie-link" id="cookieSettings">Cookie settings</button>' if GA_ID else ''
     return f'''
 <footer>
   <div class="container">
@@ -93,11 +102,13 @@ def footer(home):
   </div>
   <div class="container f-top">
     <div class="about-f">
-      <a href="{p}#home" class="logo"><span class="mark" aria-hidden="true">ST</span><span><span class="name">SMART <span>TUTORIALS</span></span><small>Vijayanagar, Bengaluru</small></span></a>
-      <p>A unit of Smart Study Center, helping students of Class 8, 9, 10 and PUC learn with clarity and confidence. Today a reader, Tomorrow a Leader.</p>
+      <a href="{p}#home" class="logo"><span class="mark" aria-hidden="true"></span><span><span class="name">Smart <span>Tutorials</span></span><small>Vijayanagar, Bengaluru</small></span></a>
+      <p>A unit of Smart Study Center, helping students of Class 8, 9, 10 and PUC learn with clarity and confidence. Gather to learn and grow.</p>
       <div class="f-social">
         <a href="tel:+919731045709" aria-label="Call Smart Tutorials">{ic('phone')}</a>
         <a href="{WA}" target="_blank" rel="noopener" aria-label="WhatsApp (opens in a new tab)">{wa}</a>
+        <a href="{IG}" target="_blank" rel="noopener" aria-label="Instagram (opens in a new tab)">{ic('ig')}</a>
+        <a href="mailto:{EMAIL}" aria-label="Email Smart Tutorials">{ic('mail')}</a>
         <a href="{MAP}" target="_blank" rel="noopener" aria-label="Google Maps (opens in a new tab)">{ic('pin')}</a>
       </div>
     </div>
@@ -124,7 +135,8 @@ def footer(home):
       <ul class="ci">
         <li>{ic('pin')}<span>822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Bengaluru – 560104</span></li>
         <li>{ic('phone')}<a href="tel:+919731045709">097310 45709</a></li>
-        <li>{ic('clock')}<span>10:00 AM – 10:00 PM</span></li>
+        <li>{ic('mail')}{MAIL}</li>
+        <li>{ic('clock')}<span>{HOURS}<br>Sunday closed</span></li>
       </ul>
     </div>
   </div>
@@ -133,8 +145,8 @@ def footer(home):
   </div>
   <div class="f-bottom">
     <div class="container">
-      <span>© <span id="yr">2026</span> Smart Tutorials. All Rights Reserved.</span>
-      <span>Designed &amp; Developed by <span class="credit">Ramify Technologies</span></span>
+      <span>© <span id="yr">2026</span> Smart Tutorials. All Rights Reserved.{cookie_link}</span>
+      <span>Designed &amp; Developed by <a class="credit" href="https://theramify.in" target="_blank" rel="noopener">Theramify Technologies</a></span>
     </div>
   </div>
 </footer>
@@ -185,9 +197,10 @@ def course(title, range_, meta, desc, items, icon, extra='', ribbon='', url=''):
       </div>'''
 
 faqs = [
- ('What are the centre timings?', 'The centre is open from 10:00 AM to 10:00 PM. Please call to confirm the batch timing for your class, as batches are planned around school and college hours.'),
+ ('What are the centre timings?', 'The centre is open Monday to Saturday, 10:00 AM to 9:00 PM, and closed on Sunday. Please call to confirm the batch timing for your class, as batches are planned around school and college hours.'),
  ('Which classes and boards do you teach?', 'We teach Class 8, 9, 10 and PUC students, and cover ICSE, CBSE and State syllabus.'),
  ('Where is Smart Tutorials located?', '822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Hampi Nagar, RPC Layout, Bengaluru – 560104.'),
+ ('Which areas do your students come from?', 'Students come to us from Vijayanagar, Chandra Layout, Nagarbhavi, Attiguppe, Kengeri, Hampi Nagar and RPC Layout. The centre is on 9th Main Road, Vijayanagar II Stage.'),
  ('Do you offer one-to-one classes?', 'Yes. Along with regular batches, one-to-one sessions are available for students who need extra attention in a subject. Call us to check availability.'),
  ('Can my child attend a demo class first?', 'Yes, a free demo class is available. Call us or fill the enquiry form and we will fix a convenient time.'),
  ('What are the fees?', f'Fees depend on the class, board and subjects. Please call {TEL} or visit the centre for the current fee details and refund terms, in writing, before you decide.'),
@@ -200,7 +213,7 @@ def index():
     faq_ld = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub(r'<[^>]+>', '', a)}} for q, a in faqs]}, ensure_ascii=False)
     ld = f'''<script type="application/ld+json">
-{{"@context":"https://schema.org","@type":["EducationalOrganization","LocalBusiness"],"@id":"{SITE}/#org","name":"Smart Tutorials","description":"Tuition for Class 8, 9, 10 and PUC students, covering ICSE, CBSE and State syllabus.","sameAs":["{MAP}"],"alternateName":"Smart Tutorials, a unit of Smart Study Center","url":"{SITE}/","telephone":"+91-97310-45709","image":"{SITE}/images/og-image.jpg","slogan":"Today a reader, Tomorrow a Leader","address":{{"@type":"PostalAddress","streetAddress":"822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Hampi Nagar, RPC Layout","addressLocality":"Bengaluru","addressRegion":"Karnataka","postalCode":"560104","addressCountry":"IN"}},"geo":{{"@type":"GeoCoordinates","latitude":12.9584351,"longitude":77.5365863}},"hasMap":"{MAP}","areaServed":["Vijayanagar","Hampi Nagar","RPC Layout","Bengaluru"]}}
+{{"@context":"https://schema.org","@type":["EducationalOrganization","LocalBusiness"],"@id":"{SITE}/#org","name":"Smart Tutorials","description":"Tuition for Class 8, 9, 10 and PUC students, covering ICSE, CBSE and State syllabus.","sameAs":["{MAP}","{IG}"],"alternateName":"Smart Tutorials, a unit of Smart Study Center","url":"{SITE}/","telephone":"+91-97310-45709","email":"{EMAIL}","image":"{SITE}/images/og-image.jpg","logo":"{SITE}/images/brand/smart-tutorials-logo.png","slogan":"Gather to learn and grow","address":{{"@type":"PostalAddress","streetAddress":"822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Hampi Nagar, RPC Layout","addressLocality":"Bengaluru","addressRegion":"Karnataka","postalCode":"560104","addressCountry":"IN"}},"geo":{{"@type":"GeoCoordinates","latitude":12.9584351,"longitude":77.5365863}},"hasMap":"{MAP}","areaServed":["Vijayanagar","Chandra Layout","Nagarbhavi","Attiguppe","Kengeri","Hampi Nagar","RPC Layout","Bengaluru"],"openingHoursSpecification":[{{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"10:00","closes":"21:00"}}]}}
 </script>
 <script type="application/ld+json">
 {faq_ld}
@@ -213,7 +226,7 @@ def index():
     s += f'''
 <div class="ticker" role="region" aria-label="Notice">
   <b>Notice</b>
-  <div class="run-wrap"><div class="run">Admissions open for Class 8, 9, 10 &amp; PUC &nbsp;•&nbsp; ICSE, CBSE &amp; State &nbsp;•&nbsp; Free demo class available &nbsp;•&nbsp; One-to-one sessions for students who need extra attention &nbsp;•&nbsp; Call 097310 45709 to book a visit</div></div>
+  <div class="run-wrap"><div class="run">Admissions open for Class 8, 9, 10 &amp; PUC &nbsp;•&nbsp; ICSE, CBSE &amp; State &nbsp;•&nbsp; 100% results in 2022–23 and 2024–25 &nbsp;•&nbsp; Free demo class available &nbsp;•&nbsp; One-to-one sessions for students who need extra attention &nbsp;•&nbsp; Call 097310 45709 to book a visit</div></div>
 </div>
 
 <main id="main">
@@ -234,7 +247,7 @@ def index():
   </div>
   <button class="sl-arrow prev" id="slPrev" type="button" aria-label="Previous slide">{ic('right')}</button>
   <button class="sl-arrow next" id="slNext" type="button" aria-label="Next slide">{ic('right')}</button>
-  <a class="hero-card" href="#contact"><span class="hc-ico">{ic('pin')}</span><span><b>Visit us on 9th Main Road</b><small>Vijayanagar II Stage · 10 AM – 10 PM</small></span></a>
+  <a class="hero-card" href="#contact"><span class="hc-ico">{ic('pin')}</span><span><b>Visit us on 9th Main Road</b><small>Vijayanagar II Stage · Mon – Sat, 10 AM – 9 PM</small></span></a>
 </section>
 
 <section class="features" aria-label="Highlights">
@@ -242,7 +255,7 @@ def index():
     <div class="feat fade-in"><span class="ico">{ic('star')}</span><div><p class="feat-t">4.7 on Google</p><p>From 157 reviews, as on 4 Nov 2026</p></div></div>
     <div class="feat fade-in"><span class="ico">{ic('teacher')}</span><div><p class="feat-t">Experienced Teachers</p><p>Approachable and dedicated</p></div></div>
     <div class="feat fade-in"><span class="ico">{ic('users')}</span><div><p class="feat-t">One-to-One Sessions</p><p>Personal attention when needed</p></div></div>
-    <div class="feat fade-in"><span class="ico">{ic('clock')}</span><div><p class="feat-t">10 AM – 10 PM</p><p>Centre timings</p></div></div>
+    <div class="feat fade-in"><span class="ico">{ic('clock')}</span><div><p class="feat-t">10 AM – 9 PM</p><p>Monday to Saturday</p></div></div>
   </div>
 </section>
 
@@ -255,7 +268,7 @@ def index():
     <div>
       <p class="eyebrow">About Us</p>
       <h2>A tuition centre for students in Vijayanagar</h2>
-      <p>Smart Tutorials, a unit of Smart Study Center, is on 9th Main Road, Vijayanagar II Stage, near Brooklyn National Public School. We teach Class 8, 9, 10 and PUC students from ICSE, CBSE and State syllabus, in the Hampi Nagar and RPC Layout area of Vijayanagar.</p>
+      <p>Smart Tutorials, a unit of Smart Study Center, is on 9th Main Road, Vijayanagar II Stage, near Brooklyn National Public School. We teach Class 8, 9, 10 and PUC students from ICSE, CBSE and State syllabus, in the Hampi Nagar and RPC Layout area of Vijayanagar. Students join us from across Vijayanagar, Chandra Layout, Nagarbhavi, Attiguppe and Kengeri.</p>
       <p class="vision">We want every student to walk out of our classes sure of what they have learned, responsible for their own work and ready to do their very best.</p>
       <blockquote>"Teachers are approachable and homely atmosphere and best place for students." <small>A review on Google</small></blockquote>
       <ul class="checks">
@@ -296,7 +309,7 @@ def index():
         <li>{ic('check')}Experienced teachers</li>
         <li>{ic('check')}One-to-one sessions</li>
         <li>{ic('check')}Regular tests &amp; doubt clearing</li>
-        <li>{ic('check')}Open till 10 PM</li>
+        <li>{ic('check')}Open till 9 PM</li>
       </ul>
       <div class="btns">
         <a href="tel:+919731045709" class="btn btn-yellow">{ic('phone')} Call Now</a>
@@ -404,10 +417,35 @@ def index():
     <div class="gal-grid">
       <figure class="fade-in"><img src="images/centre/classroom.webp" srcset="images/centre/classroom-480.webp 480w, images/centre/classroom.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="720" loading="lazy" alt="Rows of wooden benches in a Smart Tutorials classroom"><figcaption>Classroom</figcaption></figure>
       <figure class="fade-in"><img src="images/centre/tests.webp" srcset="images/centre/tests-480.webp 480w, images/centre/tests.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="540" loading="lazy" alt="Students writing a test at wooden desks, faces blurred"><figcaption>Regular tests</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/test-practice.webp" srcset="images/centre/test-practice-480.webp 480w, images/centre/test-practice.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="540" loading="lazy" alt="Students writing a practice test at their desks, faces blurred"><figcaption>Test practice</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/team.webp" srcset="images/centre/team-480.webp 480w, images/centre/team.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="720" loading="lazy" alt="Smart Tutorials teachers and staff standing together at a career counselling event"><figcaption>Our teachers and staff</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/career-talk-class10.webp" srcset="images/centre/career-talk-class10-480.webp 480w, images/centre/career-talk-class10.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="720" loading="lazy" alt="A Smart Tutorials speaker presenting why Class 10 matters to a hall of school students, faces blurred"><figcaption>Career talk for Class 10</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/career-talk-students.webp" srcset="images/centre/career-talk-students-480.webp 480w, images/centre/career-talk-students.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="720" loading="lazy" alt="A Smart Tutorials teacher speaking to school students in a hall, faces blurred"><figcaption>Career guidance session</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/orientation.webp" srcset="images/centre/orientation-480.webp 480w, images/centre/orientation.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="540" loading="lazy" alt="Teachers lighting a lamp to open an orientation programme"><figcaption>Orientation programme</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/lamp-lighting.webp" srcset="images/centre/lamp-lighting-480.webp 480w, images/centre/lamp-lighting.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="720" loading="lazy" alt="A teacher lighting a brass lamp decorated with marigolds while colleagues look on"><figcaption>Lamp lighting at a function</figcaption></figure>
+      <figure class="fade-in"><img src="images/centre/farewell.webp" srcset="images/centre/farewell-480.webp 480w, images/centre/farewell.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="575" loading="lazy" alt="Students and teachers together at a farewell celebration, students' faces blurred"><figcaption>Farewell celebration</figcaption></figure>
       <figure class="fade-in"><img src="images/centre/office.webp" srcset="images/centre/office-480.webp 480w, images/centre/office.webp 960w" sizes="(max-width:992px) 50vw, 360px" width="960" height="720" loading="lazy" alt="A staff member working at a desk in the Smart Tutorials office"><figcaption>Our office</figcaption></figure>
       <figure class="fade-in"><img src="images/centre/building.webp" srcset="images/centre/building-480.webp 480w, images/centre/building.webp 706w" sizes="(max-width:992px) 50vw, 360px" width="706" height="377" loading="lazy" alt="The Smart Tutorials building with its red name board"><figcaption>Our building on 9th Main Road</figcaption></figure>
-      <figure class="fade-in"><img src="images/centre/lamp.webp" srcset="images/centre/lamp-480.webp 480w, images/centre/lamp.webp 720w" sizes="(max-width:992px) 50vw, 360px" width="720" height="540" loading="lazy" alt="A brass lamp decorated with yellow marigolds at a centre function"><figcaption>Lamp lighting at a function</figcaption></figure>
       <figure class="fade-in"><img src="images/centre/rangoli.webp" srcset="images/centre/rangoli-480.webp 480w, images/centre/rangoli.webp 544w" sizes="(max-width:992px) 50vw, 360px" width="544" height="408" loading="lazy" alt="A flower arrangement of yellow and white blooms in a clay bowl"><figcaption>Celebrations at the centre</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="results" id="results">
+  <div class="container">
+    <div class="sec-title">
+      <h2>Our <span>Toppers</span></h2>
+      <p><b>100% results in 2022–23 and 2024–25.</b> Class 10 and PUC results of our students, shown with written permission from each student and parent. Results depend on each student's own effort, and we do not guarantee marks for future batches.</p>
+    </div>
+    <div class="res-grid">
+      <figure class="fade-in"><a href="images/results/toppers-2024-25.webp" target="_blank" rel="noopener" aria-label="Toppers, 2024–25: open full size (new tab)"><img src="images/results/toppers-2024-25.webp" srcset="images/results/toppers-2024-25-700.webp 700w, images/results/toppers-2024-25.webp 1381w" sizes="(max-width:768px) 100vw, 1140px" width="1381" height="976" loading="lazy" alt="Poster of Smart Tutorials SSLC toppers (ICSE, CBSE and State) and 12th CBSE and PUC toppers for academic year 2024-25, with each student's photo, name and percentage"></a><figcaption>Toppers, 2024–25<small>Tap to view full size</small></figcaption></figure>
+      <figure class="fade-in"><a href="images/results/achievers-2024-25.webp" target="_blank" rel="noopener" aria-label="Distinction and first class, Class 10, 2024–25: open full size (new tab)"><img src="images/results/achievers-2024-25.webp" srcset="images/results/achievers-2024-25-700.webp 700w, images/results/achievers-2024-25.webp 1381w" sizes="(max-width:768px) 100vw, 1140px" width="1381" height="624" loading="lazy" alt="Poster of Smart Tutorials Class 10 students who scored a distinction or first class in academic year 2024-25, with photos and names"></a><figcaption>Distinction and first class, Class 10, 2024–25<small>Tap to view full size</small></figcaption></figure>
+      <figure class="fade-in"><a href="images/results/toppers-2022-23.webp" target="_blank" rel="noopener" aria-label="Class 10 results, 2022–23: open full size (new tab)"><img src="images/results/toppers-2022-23.webp" width="706" height="468" loading="lazy" alt="Poster of Smart Tutorials Class 10 toppers, distinction holders and first class holders (ICSE, State and CBSE) for 2022-23, with photos, names and marks"></a><figcaption>Class 10 results, 2022–23<small>Tap to view full size</small></figcaption></figure>
+    </div>
+    <div class="res-list fade-in">
+      <div><h3 class="h4">Class 10 toppers, 2024–25</h3><p>SSLC, ICSE and CBSE</p><div class="tbl"><table><tr><th scope="col">Student</th><th scope="col">Score</th></tr><tr><td>Shukthi R</td><td>98%</td></tr><tr><td>Deeksha K</td><td>97%</td></tr><tr><td>Raksha R</td><td>95.2%</td></tr><tr><td>Tanishka</td><td>95%</td></tr><tr><td>Bhagath Vinayak</td><td>93.2%</td></tr><tr><td>Samith Shetty</td><td>93%</td></tr><tr><td>Madan Gowda</td><td>93%</td></tr><tr><td>Pratith S</td><td>93%</td></tr><tr><td>Rajesh</td><td>92%</td></tr><tr><td>Megha</td><td>92%</td></tr><tr><td>Mohith</td><td>92%</td></tr><tr><td>Hemashree</td><td>91%</td></tr><tr><td>Shravani S M</td><td>91%</td></tr><tr><td>Gamana</td><td>90%</td></tr><tr><td>Arjun</td><td>90%</td></tr><tr><td>Tanisha C</td><td>89%</td></tr><tr><td>Ardra Ajay</td><td>88%</td></tr></table></div></div>
+      <div><h3 class="h4">12th and II PUC toppers, 2024–25</h3><div class="tbl"><table><tr><th scope="col">Student</th><th scope="col">Score</th><th scope="col">Exam</th></tr><tr><td>Anushka</td><td>96%</td><td>CBSE 12th</td></tr><tr><td>Anusha</td><td>91%</td><td>II PUC</td></tr><tr><td>Anushree</td><td>90%</td><td>II PUC</td></tr><tr><td>Rachana Gowda</td><td>89%</td><td>II PUC</td></tr><tr><td>Ira</td><td>87%</td><td>CBSE 12th</td></tr><tr><td>Sowbhagya</td><td>87%</td><td>II PUC</td></tr></table></div>
+      <h3 class="h4">Class 10 toppers, 2022–23</h3><p>ICSE, State and CBSE</p><div class="tbl"><table><tr><th scope="col">Student</th><th scope="col">Score</th></tr><tr><td>Harsha J</td><td>97%</td></tr><tr><td>Krupa</td><td>96.8%</td></tr><tr><td>Harshini</td><td>96.7%</td></tr><tr><td>Anushka</td><td>96%</td></tr><tr><td>Ira</td><td>94%</td></tr><tr><td>Prathyush</td><td>93.7%</td></tr></table></div></div>
     </div>
   </div>
 </section>
@@ -468,7 +506,9 @@ def index():
       <div class="c-list">
         <div class="c-item"><span class="ico">{ic('pin')}</span><div><h3 class="h4">Address</h3><p>822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Hampi Nagar, RPC Layout, Bengaluru, Karnataka 560104</p></div></div>
         <div class="c-item"><span class="ico">{ic('phone')}</span><div><h3 class="h4">Phone &amp; WhatsApp</h3><a href="tel:+919731045709">097310 45709</a></div></div>
-        <div class="c-item"><span class="ico">{ic('clock')}</span><div><h3 class="h4">Timings</h3><p>10:00 AM – 10:00 PM</p></div></div>
+        <div class="c-item"><span class="ico">{ic('mail')}</span><div><h3 class="h4">Email</h3>{MAIL}</div></div>
+        <div class="c-item"><span class="ico">{ic('ig')}</span><div><h3 class="h4">Instagram</h3><a href="{IG}" target="_blank" rel="noopener">@smart.tutorials_</a></div></div>
+        <div class="c-item"><span class="ico">{ic('clock')}</span><div><h3 class="h4">Timings</h3><p>{HOURS}<br>Sunday closed</p></div></div>
       </div>
     </div>
     <div class="map" id="mapBox">
@@ -504,7 +544,7 @@ def page(path, title, desc, h1, sub, body):
 </main>
 ''' + footer(False)
 
-privacy = page('privacy.html','Privacy Notice','How Smart Tutorials handles personal data shared through this website.','Privacy Notice','Last updated: 4 November 2026', f'''
+privacy = page('privacy.html','Privacy Notice','How Smart Tutorials handles personal data shared through this website.','Privacy Notice','Last updated: 7 November 2026', f'''
 <h2>Who we are</h2>
 <p>Smart Tutorials, a unit of Smart Study Center, 822, 9th Main Road, Vijaya Nagar II Stage, Bengaluru 560104, decides how personal data shared with us for enquiries is used. This notice follows India's Digital Personal Data Protection Act, 2023 and the rules made under it.</p>
 <h2>What this website collects</h2>
@@ -517,9 +557,10 @@ privacy = page('privacy.html','Privacy Notice','How Smart Tutorials handles pers
 </table></div>
 <p>Please do not share sensitive details about a student's health or family in your message.</p>
 <h2>Children's data</h2>
-<p>Enquiries should come from a parent or guardian, or from a person aged 18 or older. We do not use this website to track children's behaviour or to show them targeted advertising. Students' faces in our website photos are blurred, and we do not publish a student's name, photo or result without written consent.</p>
-<h2>Cookies and tracking</h2>
-<p>This website does not set cookies and does not use analytics or advertising trackers. If this changes, we will update this notice and ask for your consent where needed.</p>
+<p>Enquiries should come from a parent or guardian, or from a person aged 18 or older. We do not use this website to track children's behaviour or to show them targeted advertising. Students' faces in our gallery photos are blurred. We publish toppers' names, photos and results only with written consent from the student and parent.</p>
+<h2>Cookies and analytics</h2>
+<p>We use Google Analytics to count visits and see which pages are useful, but only if you click "Allow" on the cookie notice. Until then, no analytics code loads and no analytics cookies are set. If you allow it, Google Analytics sets cookies and receives your IP address, device and browser details and the pages you visit. We have turned off Google's advertising features and do not use this data to show anyone ads.</p>
+<p>You can change your choice at any time with the "Cookie settings" link at the bottom of every page. Your choice itself is saved only in your own browser.</p>
 <h2>Other services</h2>
 <ul>
 <li><b>WhatsApp:</b> messages you send are also handled under WhatsApp's own privacy terms.</li>
@@ -531,10 +572,10 @@ privacy = page('privacy.html','Privacy Notice','How Smart Tutorials handles pers
 <h2>Your rights</h2>
 <p>You may ask us for a summary of your data, ask us to correct or erase it, withdraw your consent, raise a grievance, or nominate someone to act for you. Withdrawing consent is as easy as asking us; we will then stop using your details for this enquiry.</p>
 <h2>Contact and complaints</h2>
-<p>Call {TEL} or write to us at the address above, marked "Privacy". If you are not satisfied with our reply, you may complain to the Data Protection Board of India.</p>
+<p>Call {TEL}, email {MAIL}, or write to us at the address above, marked "Privacy". If you are not satisfied with our reply, you may complain to the Data Protection Board of India.</p>
 ''')
 
-terms = page('terms.html','Terms of Use','Terms for using the Smart Tutorials website, including fees, refunds and our no-guarantee statement on results.','Terms of Use','Last updated: 4 November 2026', f'''
+terms = page('terms.html','Terms of Use','Terms for using the Smart Tutorials website, including fees, refunds and our no-guarantee statement on results.','Terms of Use','Last updated: 7 November 2026', f'''
 <h2>Using this website</h2>
 <p>This website gives general information about Smart Tutorials. By using it, you agree to these terms. Please confirm batch timings, subjects and fees with the centre before you make a decision.</p>
 <h2>No guarantee of results</h2>
@@ -548,10 +589,10 @@ terms = page('terms.html','Terms of Use','Terms for using the Smart Tutorials we
 <h2>Governing law</h2>
 <p>These terms are governed by the laws of India, and courts in Bengaluru have jurisdiction. This does not affect your rights under the Consumer Protection Act, 2019.</p>
 <h2>Contact</h2>
-<p>Smart Tutorials, 822, 9th Main Road, Vijaya Nagar II Stage, Bengaluru 560104. Phone: {TEL}.</p>
+<p>Smart Tutorials, 822, 9th Main Road, Vijaya Nagar II Stage, Bengaluru 560104. Phone: {TEL}. Email: {MAIL}.</p>
 ''')
 
-disclosures = page('disclosures.html','Disclosures &amp; Helplines','Courses, teacher qualifications, fees, results, complaint process and student helplines at Smart Tutorials.','Disclosures &amp; Helplines','Clear information for parents and students. Last updated: 4 November 2026', f'''
+disclosures = page('disclosures.html','Disclosures &amp; Helplines','Courses, teacher qualifications, fees, results, complaint process and student helplines at Smart Tutorials.','Disclosures &amp; Helplines','Clear information for parents and students. Last updated: 7 November 2026', f'''
 <h2>About the centre</h2>
 <p>Smart Tutorials is a unit of Smart Study Center (Reg.), at 822, 9th Main Road, Vijaya Nagar II Stage, Bengaluru 560104. Please ask at the office to see registration documents.</p>
 <h2>Courses</h2>
@@ -574,9 +615,10 @@ disclosures = page('disclosures.html','Disclosures &amp; Helplines','Courses, te
 <p>Fees depend on the class, board and subjects. Please call {TEL} for the current fee and ask for the fee and refund terms in writing before you pay.</p>
 <h2>Results and reviews</h2>
 <p><b>We do not guarantee marks, ranks or admission.</b> Joining any tuition programme does not assure success in an examination.</p>
-<p>Our Google rating of 4.7 is from 157 reviews, as on 4 November 2026, and it changes over time. You can <a href="{MAP}" target="_blank" rel="noopener">read all the reviews on Google</a>. We use a student's name, photo or result in advertising only with written consent.</p>
+<p>"100% results" refers to our students' board exam results in 2022–23 and 2024–25. Past results do not promise the same result for any future student. Ask at the centre to see the records behind this claim.</p>
+<p>Our Google rating of 4.7 is from 157 reviews, as on 4 November 2026, and it changes over time. You can <a href="{MAP}" target="_blank" rel="noopener">read all the reviews on Google</a>. We use a student's name, photo or result in advertising only with written consent. The toppers shown on our home page are shared with written permission from each student and parent.</p>
 <h2>Complaints</h2>
-<p>Please tell us first. Call {TEL} or write to the centre's office, and we will try to resolve your concern quickly. You may also contact the National Consumer Helpline on <a href="tel:1915">1915</a>.</p>
+<p>Please tell us first. Call {TEL}, email {MAIL} or write to the centre's office, and we will try to resolve your concern quickly. You may also contact the National Consumer Helpline on <a href="tel:1915">1915</a>.</p>
 <h2>Student safety and support helplines</h2>
 <div class="tbl"><table>
 <tr><th scope="col">Service</th><th scope="col">Number</th></tr>
@@ -594,6 +636,8 @@ nf = head('Page Not Found | Smart Tutorials','This page could not be found on th
 <h1>Page not found</h1>
 <p>The page you are looking for is not here.</p>
 <div class="btns"><a class="btn btn-red" href="./">Go to home page</a><a class="btn btn-navy" href="tel:+919731045709">Call 097310 45709</a></div>
+<h2>Popular pages</h2>
+<ul class="nf-links"><li><a href="class-8-9-tuition-vijayanagar.html">Class 8 &amp; 9 Tuition</a></li><li><a href="class-10-tuition-vijayanagar.html">Class 10 Tuition</a></li><li><a href="puc-tuition-vijayanagar.html">PUC Tuition</a></li><li><a href="./#results">Our Toppers</a></li></ul>
 </div></div></main>
 ''' + footer(False)
 
@@ -630,7 +674,7 @@ def course_page(path, short, title, desc, h1, sub, img, img_w, img_h, alt, cap, 
 <h2>See a class before you decide</h2>
 <p>Book a free demo class. Tell us the class and board, and we will fix a convenient time.</p>
 <a class="btn btn-yellow" href="tel:+919731045709">Call 097310 45709</a>
-<a class="btn btn-wa" href="https://wa.me/919731045709?text=Hi%2C%20I%20would%20like%20to%20know%20about%20{wa_msg}%20tuition" target="_blank" rel="noopener">{wa}WhatsApp us</a>
+<a class="btn btn-wa" href="https://wa.me/919731045709?text=Hi%2C%20I%20would%20like%20to%20know%20about%20{wa_msg}" target="_blank" rel="noopener">{wa}WhatsApp us</a>
 </div>
 <h2>Questions parents ask</h2>
 {faq_html}
@@ -746,6 +790,6 @@ course_pages = [(C89, class89), (C10, class10), (PUC, puc)]
 for name, html in [('index.html', index()), ('privacy.html', privacy), ('terms.html', terms), ('disclosures.html', disclosures), ('404.html', nf)] + course_pages:
     open(os.path.join(OUT, name), 'w', encoding='utf-8', newline='\n').write(html)
 open(os.path.join(OUT, 'robots.txt'), 'w', newline='\n').write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
-urls = ''.join(f'  <url><loc>{SITE}/{p}</loc><lastmod>2026-11-04</lastmod></url>\n' for p in ['', 'class-8-9-tuition-vijayanagar.html', 'class-10-tuition-vijayanagar.html', 'puc-tuition-vijayanagar.html', 'disclosures.html', 'privacy.html', 'terms.html'])
+urls = ''.join(f'  <url><loc>{SITE}/{p}</loc><lastmod>2026-11-07</lastmod></url>\n' for p in ['', 'class-8-9-tuition-vijayanagar.html', 'class-10-tuition-vijayanagar.html', 'puc-tuition-vijayanagar.html', 'disclosures.html', 'privacy.html', 'terms.html'])
 open(os.path.join(OUT, 'sitemap.xml'), 'w', newline='\n').write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
 print('built')

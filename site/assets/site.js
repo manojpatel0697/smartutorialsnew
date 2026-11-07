@@ -107,6 +107,81 @@
     box.appendChild(f);
   });
 
+  // Google Analytics, only after the visitor allows it. The ID comes from <meta name="ga-id">,
+  // which pages.py writes only when GA_ID is set. Nothing loads before consent.
+  var gaMeta = document.querySelector('meta[name="ga-id"]');
+  var GA = gaMeta && gaMeta.content;
+  if (GA) {
+    var KEY = 'st-analytics';
+    var store = {
+      get: function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } },
+      set: function (v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    };
+    var loaded = false;
+    window.dataLayer = window.dataLayer || [];
+    var gtag = function () { window.dataLayer.push(arguments); };
+    var track = function (name, params) { if (loaded) gtag('event', name, params || {}); };
+    var loadGA = function () {
+      if (loaded) return;
+      loaded = true;
+      var sc = document.createElement('script');
+      sc.async = true;
+      sc.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA);
+      document.head.appendChild(sc);
+      gtag('js', new Date());
+      gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
+    };
+    var clearGA = function () {
+      document.cookie.split(';').forEach(function (c) {
+        var n = c.split('=')[0].trim();
+        if (/^_ga/.test(n)) {
+          document.cookie = n + '=; Max-Age=0; path=/';
+          document.cookie = n + '=; Max-Age=0; path=/; domain=.' + location.hostname.replace(/^www\./, '');
+        }
+      });
+    };
+    var banner = null;
+    var showBanner = function () {
+      if (banner) return;
+      banner = document.createElement('div');
+      banner.className = 'cookie';
+      banner.setAttribute('role', 'dialog');
+      banner.setAttribute('aria-label', 'Cookie choice');
+      banner.innerHTML = '<p>We would like to use Google Analytics cookies to count visits and improve this website. ' +
+        'No advertising. Please allow only if you are 18 or older. <a href="privacy.html">Privacy Notice</a></p>' +
+        '<div class="btns"><button type="button" class="btn btn-red" data-c="yes">Allow</button>' +
+        '<button type="button" class="btn btn-ghost" data-c="no">Decline</button></div>';
+      banner.addEventListener('click', function (e) {
+        var c = e.target.getAttribute('data-c');
+        if (!c) return;
+        store.set(c);
+        if (c === 'yes') loadGA();
+        else if (loaded) { clearGA(); location.reload(); return; }
+        else clearGA();
+        banner.remove();
+        banner = null;
+      });
+      document.body.appendChild(banner);
+    };
+    var choice = store.get();
+    if (choice === 'yes') loadGA();
+    else if (choice !== 'no') showBanner();
+    var cs = $('cookieSettings');
+    if (cs) cs.addEventListener('click', showBanner);
+
+    // Enquiry events: calls, WhatsApp, email and Instagram clicks
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href');
+      if (h.indexOf('tel:') === 0) track('click_call');
+      else if (h.indexOf('wa.me') !== -1) track('click_whatsapp');
+      else if (h.indexOf('mailto:') === 0) track('click_email');
+      else if (h.indexOf('instagram.com') !== -1) track('click_instagram');
+    });
+    window.stTrack = track;
+  }
+
   // Enquiry form: builds a WhatsApp message. Nothing is stored or sent by this website.
   var form = $('enqForm');
   if (form) form.addEventListener('submit', function (e) {
@@ -140,6 +215,7 @@
     var done = $('formOk');
     done.classList.add('show');
     done.focus();
+    if (window.stTrack) window.stTrack('generate_lead', { method: 'whatsapp_form' });
     window.open(url, '_blank', 'noopener');
   });
 })();
