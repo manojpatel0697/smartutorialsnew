@@ -8,7 +8,7 @@ const dist = process.argv[2] ? resolve(process.argv[2]) : join(root, 'dist');
 if (!existsSync(dist)) { console.error('dist/ not found. Run: npm run build'); process.exit(1); }
 
 const SITE = 'https://smartstudycenters.com';
-const PHONE = '+919731045709';
+const PHONES = ['+919731045709', '+919731861427'];
 const MAX_IMAGE_KB = 300;
 // Claims the coaching advertising rules make risky. Add proof and consent before allowing any of these.
 const BANNED = [/best tuition/i, /100\s*%\s*(guarantee|guaranteed|selection|placement|job)/i, /no\.?\s*1\b/i, /top[- ]ranked/i, /guaranteed (marks|rank|result|selection|admission)/i, /we guarantee/i];
@@ -104,7 +104,7 @@ for (const [file, html] of Object.entries(docs)) {
       continue;
     }
     if (href.startsWith('tel:')) {
-      if (href.startsWith('tel:+') && href !== `tel:${PHONE}`) fail(name, `unexpected phone number: ${href}`);
+      if (href.startsWith('tel:+') && !PHONES.includes(href.slice(4))) fail(name, `unexpected phone number: ${href}`);
       continue;
     }
     const [path, hash] = href.split('#');

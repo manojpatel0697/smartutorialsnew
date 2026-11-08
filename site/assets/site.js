@@ -204,7 +204,7 @@
       form.querySelector('[aria-invalid="true"]').focus();
       return;
     }
-    var msg = 'Hi Smart Tutorials, I would like to book a free demo class.\n' +
+    var msg = 'Hi Smart Tutorials, I would like to know about tuition classes.\n' +
       'Parent/guardian: ' + val('fName') + '\nPhone: ' + phone +
       (val('fClass') ? '\nClass: ' + val('fClass') : '') +
       (val('fBoard') ? '\nBoard: ' + val('fBoard') : '') +

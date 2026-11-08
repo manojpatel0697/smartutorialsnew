@@ -60,6 +60,7 @@ def header(home):
   <div class="container">
     <div class="left">
       <a href="tel:+919731045709">{ic('phone')}097310 45709</a>
+      <a href="tel:+919731861427">{ic('phone')}097318 61427</a>
       <span class="hide-m">{ic('clock')}{HOURS}</span>
       <span class="hide-m">{ic('pin')}Vijayanagar II Stage, Bengaluru</span>
     </div>
@@ -96,7 +97,7 @@ def footer(home):
 <footer>
   <div class="container">
     <div class="f-cta">
-      <div><h3>Admissions are open. Book your free demo class.</h3><p>Visit us at Vijayanagar II Stage or call to know about batch timings.</p></div>
+      <div><h3>Admissions are open for Class 8, 9, 10 and PUC.</h3><p>Visit us at Vijayanagar II Stage or call to know about batch timings.</p></div>
       <a href="tel:+919731045709">{ic('phone')}&nbsp; 097310 45709</a>
     </div>
   </div>
@@ -135,6 +136,7 @@ def footer(home):
       <ul class="ci">
         <li>{ic('pin')}<span>822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Bengaluru – 560104</span></li>
         <li>{ic('phone')}<a href="tel:+919731045709">097310 45709</a></li>
+        <li>{ic('phone')}<a href="tel:+919731861427">097318 61427</a></li>
         <li>{ic('mail')}{MAIL}</li>
         <li>{ic('clock')}<span>{HOURS}<br>Sunday closed</span></li>
       </ul>
@@ -192,7 +194,7 @@ def course(title, range_, meta, desc, items, icon, extra='', ribbon='', url=''):
           <div class="meta">{metas}</div>
           <p>{desc}</p>
           <ul>{lis}</ul>
-          <div class="links"><a href="{url}">{title} tuition details →</a><a href="#enquiry">Book a free demo</a></div>
+          <div class="links"><a href="{url}">{title} tuition details →</a><a href="#enquiry">Enquire now</a></div>
         </div>
       </div>'''
 
@@ -202,10 +204,9 @@ faqs = [
  ('Where is Smart Tutorials located?', '822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Hampi Nagar, RPC Layout, Bengaluru – 560104.'),
  ('Which areas do your students come from?', 'Students come to us from Vijayanagar, Chandra Layout, Nagarbhavi, Attiguppe, Kengeri, Hampi Nagar and RPC Layout. The centre is on 9th Main Road, Vijayanagar II Stage.'),
  ('Do you offer one-to-one classes?', 'Yes. Along with regular batches, one-to-one sessions are available for students who need extra attention in a subject. Call us to check availability.'),
- ('Can my child attend a demo class first?', 'Yes, a free demo class is available. Call us or fill the enquiry form and we will fix a convenient time.'),
  ('What are the fees?', f'Fees depend on the class, board and subjects. Please call {TEL} or visit the centre for the current fee details and refund terms, in writing, before you decide.'),
  ('Do you guarantee marks or ranks?', 'No. We do not guarantee marks, ranks or admission anywhere. We focus on clear teaching, regular practice and doubt clearing. Results depend on each student.'),
- ('How do I track my child\'s progress?', 'Students take regular tests, and parents can speak with the teachers about how their child is doing.'),
+ ('How do I track my child\'s progress?', 'Students get regular tests, and parents can visit the office whenever needed to talk about how their child is doing.'),
 ]
 
 def index():
@@ -221,12 +222,12 @@ def index():
 <link rel="preload" as="image" href="images/centre/banner-office.webp" imagesrcset="images/centre/banner-office-960.webp 960w, images/centre/banner-office.webp 1920w" imagesizes="(max-width:768px) 640px, 100vw" fetchpriority="high">
 '''
     s = head('Class 8–10 &amp; PUC Tuition in Vijayanagar | Smart Tutorials',
-             'Tuition for Class 8, 9, 10 and PUC (ICSE, CBSE, State) in Vijayanagar II Stage, Bengaluru. One-to-one sessions and a free demo class. Call 097310 45709.', '', ld)
+             'Tuition for Class 8, 9, 10 and PUC (ICSE, CBSE, State) in Vijayanagar II Stage, Bengaluru. One-to-one sessions and regular tests. Call 097310 45709.', '', ld)
     s += header(True)
     s += f'''
 <div class="ticker" role="region" aria-label="Notice">
   <b>Notice</b>
-  <div class="run-wrap"><div class="run">Admissions open for Class 8, 9, 10 &amp; PUC &nbsp;•&nbsp; ICSE, CBSE &amp; State &nbsp;•&nbsp; 100% results in 2022–23 and 2024–25 &nbsp;•&nbsp; Free demo class available &nbsp;•&nbsp; One-to-one sessions for students who need extra attention &nbsp;•&nbsp; Call 097310 45709 to book a visit</div></div>
+  <div class="run-wrap"><div class="run">Admissions open for Class 8, 9, 10 &amp; PUC &nbsp;•&nbsp; ICSE, CBSE &amp; State &nbsp;•&nbsp; 100% results in 2022–23 and 2024–25 &nbsp;•&nbsp; One-to-one sessions for students who need extra attention &nbsp;•&nbsp; Call 097310 45709 to book a visit</div></div>
 </div>
 
 <main id="main">
@@ -234,7 +235,7 @@ def index():
   <div class="slides" id="slides">'''
     s += slide('s1','banner-office','At work in the Smart Tutorials office','Admissions Open','h1','Tuition Classes in <span>Vijayanagar</span>, Bengaluru',
         '<p>Class 8, 9, 10 &amp; PUC · ICSE, CBSE &amp; State · Experienced teachers in a friendly, homely atmosphere.</p>',
-        '<a href="#enquiry" class="btn btn-yellow">Book Free Demo</a><a href="tel:+919731045709" class="btn btn-outline">Call 097310 45709</a>', True,
+        '<a href="#enquiry" class="btn btn-yellow">Enquire Now</a><a href="tel:+919731045709" class="btn btn-outline">Call 097310 45709</a>', True,
         '<div class="trust"><span class="stars" aria-hidden="true"><i>★★★★★</i></span><span><b>4.7</b> on Google · 157 reviews, as on 4 Nov 2026</span></div>')
     s += slide('s2','banner-tests','Students writing a test at Smart Tutorials, faces blurred for privacy','Rated 4.7 on Google','h2','Loved by Parents.<br><span>Trusted by Students.</span>',
         '<blockquote>"Teaching quality and quantity is very satisfying." <small>A review on Google</small></blockquote>',
@@ -242,7 +243,7 @@ def index():
     s += slide('s3','banner-classroom','A classroom with wooden benches at Smart Tutorials','One-to-One Sessions','h2','Personal Attention for <span>Every Student</span>',
         '<p>Extra help in a subject, at a pace that suits your child. Doubts are cleared patiently.</p>',
         '<a href="#enquiry" class="btn btn-yellow">Book a Session</a><a href="#courses" class="btn btn-outline">View Courses</a>', False,
-        f'<ul class="trust chips"><li>{ic("check")}Free demo class</li><li>{ic("check")}ICSE · CBSE · State</li></ul>')
+        f'<ul class="trust chips"><li>{ic("check")}Regular tests</li><li>{ic("check")}ICSE · CBSE · State</li></ul>')
     s += f'''
   </div>
   <button class="sl-arrow prev" id="slPrev" type="button" aria-label="Previous slide">{ic('right')}</button>
@@ -302,9 +303,9 @@ def index():
 <section class="hero" id="demo">
   <div class="container">
     <div>
-      <span class="tag">Free Demo Class</span>
-      <h2 class="h-big">Not sure yet? <span>Try a class for free.</span></h2>
-      <p>See how we teach before you decide. Meet the teachers, sit in a class and ask your questions in a friendly, homely atmosphere.</p>
+      <span class="tag">Admissions Open</span>
+      <h2 class="h-big">Not sure yet? <span>Come and meet us.</span></h2>
+      <p>Visit the centre before you decide. Meet the teachers and ask your questions in a friendly, homely atmosphere.</p>
       <ul>
         <li>{ic('check')}Experienced teachers</li>
         <li>{ic('check')}One-to-one sessions</li>
@@ -319,7 +320,7 @@ def index():
     </div>
 
     <div class="enquiry" id="enquiry">
-      <h3>Book a Free Demo Class<small>Send your details to us on WhatsApp</small></h3>
+      <h3>Send an Enquiry<small>Send your details to us on WhatsApp</small></h3>
       <form id="enqForm" novalidate>
         <div>
           <label for="fName">Parent / guardian name <span class="req" aria-hidden="true">*</span></label>
@@ -402,7 +403,7 @@ def index():
     <div class="steps">
       <div class="step fade-in"><div class="circle"><b>1</b>{ic('phone')}</div><div><h3 class="h4">Call or Enquire</h3><p>Call us or fill the enquiry form with your child's class and board.</p></div></div>
       <div class="step fade-in"><div class="circle"><b>2</b>{ic('pin')}</div><div><h3 class="h4">Visit the Centre</h3><p>Come to 9th Main Road, Vijayanagar and meet our teachers.</p></div></div>
-      <div class="step fade-in"><div class="circle"><b>3</b>{ic('book')}</div><div><h3 class="h4">Attend a Free Demo</h3><p>Your child sits in a class to see how we teach.</p></div></div>
+      <div class="step fade-in"><div class="circle"><b>3</b>{ic('book')}</div><div><h3 class="h4">Confirm Timing &amp; Fees</h3><p>Ask about batch timings, and get the fee and refund terms in writing.</p></div></div>
       <div class="step fade-in"><div class="circle"><b>4</b>{ic('check')}</div><div><h3 class="h4">Join the Batch</h3><p>Pick a batch or one-to-one timing that fits school or college hours.</p></div></div>
     </div>
   </div>
@@ -490,11 +491,11 @@ def index():
   <div class="container">
     <div>
       <h2>Looking for tuition near Vijayanagar?</h2>
-      <p>Visit the centre, meet the teachers and attend a free demo class.</p>
+      <p>Visit the centre, meet the teachers and ask your questions.</p>
     </div>
     <div class="btns">
       <a href="tel:+919731045709" class="btn btn-navy">Call 097310 45709</a>
-      <a href="#enquiry" class="btn btn-line">Book Free Demo</a>
+      <a href="#enquiry" class="btn btn-line">Enquire Now</a>
     </div>
   </div>
 </div>
@@ -506,6 +507,7 @@ def index():
       <div class="c-list">
         <div class="c-item"><span class="ico">{ic('pin')}</span><div><h3 class="h4">Address</h3><p>822, 9th Main Road, near Brooklyn National Public School, Vijaya Nagar II Stage, Hampi Nagar, RPC Layout, Bengaluru, Karnataka 560104</p></div></div>
         <div class="c-item"><span class="ico">{ic('phone')}</span><div><h3 class="h4">Phone &amp; WhatsApp</h3><a href="tel:+919731045709">097310 45709</a></div></div>
+        <div class="c-item"><span class="ico">{ic('phone')}</span><div><h3 class="h4">Phone</h3><a href="tel:+919731861427">097318 61427</a></div></div>
         <div class="c-item"><span class="ico">{ic('mail')}</span><div><h3 class="h4">Email</h3>{MAIL}</div></div>
         <div class="c-item"><span class="ico">{ic('ig')}</span><div><h3 class="h4">Instagram</h3><a href="{IG}" target="_blank" rel="noopener">@smart.tutorials_</a></div></div>
         <div class="c-item"><span class="ico">{ic('clock')}</span><div><h3 class="h4">Timings</h3><p>{HOURS}<br>Sunday closed</p></div></div>
@@ -544,14 +546,14 @@ def page(path, title, desc, h1, sub, body):
 </main>
 ''' + footer(False)
 
-privacy = page('privacy.html','Privacy Notice','How Smart Tutorials handles personal data shared through this website.','Privacy Notice','Last updated: 7 November 2026', f'''
+privacy = page('privacy.html','Privacy Notice','How Smart Tutorials handles personal data shared through this website.','Privacy Notice','Last updated: 8 November 2026', f'''
 <h2>Who we are</h2>
 <p>Smart Tutorials, a unit of Smart Study Center, 822, 9th Main Road, Vijaya Nagar II Stage, Bengaluru 560104, decides how personal data shared with us for enquiries is used. This notice follows India's Digital Personal Data Protection Act, 2023 and the rules made under it.</p>
 <h2>What this website collects</h2>
 <p>This website has no user accounts and does not save enquiry form details on any server. The form prepares a WhatsApp message on your own device. We receive the details only if you press send in WhatsApp.</p>
 <div class="tbl"><table>
 <tr><th scope="col">What we receive</th><th scope="col">Why</th></tr>
-<tr><td>Parent or guardian name and mobile number</td><td>To reply to your enquiry and arrange a demo class</td></tr>
+<tr><td>Parent or guardian name and mobile number</td><td>To reply to your enquiry</td></tr>
 <tr><td>Student's class and board, if you share them</td><td>To suggest the right batch</td></tr>
 <tr><td>Anything you write in your message</td><td>To answer your question</td></tr>
 </table></div>
@@ -671,8 +673,8 @@ def course_page(path, short, title, desc, h1, sub, img, img_w, img_h, alt, cap, 
 <figure><img src="images/centre/{img}.webp" srcset="images/centre/{img}-480.webp 480w, images/centre/{img}.webp {img_w}w" sizes="(max-width:900px) 100vw, 860px" width="{img_w}" height="{img_h}" alt="{alt}" fetchpriority="high"><figcaption>{cap}</figcaption></figure>
 {body}
 <div class="course-cta">
-<h2>See a class before you decide</h2>
-<p>Book a free demo class. Tell us the class and board, and we will fix a convenient time.</p>
+<h2>Talk to us before you decide</h2>
+<p>Tell us the class and board, and we will explain the batches and timings.</p>
 <a class="btn btn-yellow" href="tel:+919731045709">Call 097310 45709</a>
 <a class="btn btn-wa" href="https://wa.me/919731045709?text=Hi%2C%20I%20would%20like%20to%20know%20about%20{wa_msg}" target="_blank" rel="noopener">{wa}WhatsApp us</a>
 </div>
@@ -691,7 +693,7 @@ PUC = 'puc-tuition-vijayanagar.html'
 
 class89 = course_page(C89, 'Class 8 &amp; 9 Tuition',
   'Class 8 &amp; 9 Tuition in Vijayanagar | Smart Tutorials',
-  'Class 8 and 9 tuition for ICSE, CBSE and State students in Vijayanagar II Stage, Bengaluru. Maths, Science, languages, regular tests and a free demo class.',
+  'Class 8 and 9 tuition for ICSE, CBSE and State students in Vijayanagar II Stage, Bengaluru. Maths, Science, languages, regular tests and doubt clearing.',
   'Class 8 &amp; 9 Tuition in Vijayanagar, Bengaluru', 'For ICSE, CBSE and State students, at 9th Main Road, Vijayanagar II Stage',
   'classroom', 960, 720, 'Rows of wooden benches in a classroom at Smart Tutorials, Vijayanagar', 'A classroom at our Vijayanagar centre.', f'''
 <p>Maths gets more abstract in Class 8 and 9, and Science starts to split into Physics, Chemistry and Biology. A topic missed now often comes back in Class 10, when there is far less time to go over it again. Our Class 8 and 9 batches help students catch those gaps early, while there is still room to work on them calmly.</p>
@@ -720,14 +722,14 @@ class89 = course_page(C89, 'Class 8 &amp; 9 Tuition',
 <li><b>Batch timings</b> are planned around school hours. Call us for the current timing.</li>
 </ul>
 ''', [
-  ('Should my child start tuition in Class 8, or wait for Class 10?', 'It depends on the child. If one subject is already difficult, starting earlier usually means fewer gaps to fill in Class 10. If school is going well, you may not need it yet. A free demo class can help you decide.'),
+  ('Should my child start tuition in Class 8, or wait for Class 10?', 'It depends on the child. If one subject is already difficult, starting earlier usually means fewer gaps to fill in Class 10. If school is going well, you may not need it yet. Call us or visit the centre, and we can talk it through.'),
   ('Can my child join for only one subject?', 'Please call us on 097310 45709. We will tell you which subject batches are running and whether a one-to-one session would suit better.'),
   ('Do you teach all three boards together?', 'We cover ICSE, CBSE and State syllabus. Tell us your child\'s board when you enquire, and we will explain how the batch works for it.'),
 ], [(C10, 'Class 10 Tuition'), (PUC, 'PUC Tuition')])
 
 class10 = course_page(C10, 'Class 10 Tuition',
   'Class 10 Tuition in Vijayanagar, Bengaluru | Smart Tutorials',
-  'Class 10 tuition for SSLC, CBSE and ICSE students in Vijayanagar II Stage, Bengaluru. Special board-year coaching, regular tests and a free demo class.',
+  'Class 10 tuition for SSLC, CBSE and ICSE students in Vijayanagar II Stage, Bengaluru. Special board-year coaching, regular tests and revision.',
   'Class 10 Tuition in Vijayanagar, Bengaluru', 'Special coaching for SSLC, CBSE and ICSE students',
   'tests', 960, 540, 'Students writing a test at desks at Smart Tutorials, with faces blurred for privacy', 'Students writing a test at our centre. Faces are blurred for privacy.', f'''
 <p>For most students, Class 10 is the first board exam, and it can feel like a big step for the whole family. Our Class 10 batches give students a steady routine for the year: subject coaching, regular tests, revision, and time to clear doubts before they turn into exam-day worries.</p>
@@ -759,7 +761,6 @@ class10 = course_page(C10, 'Class 10 Tuition',
 ''', [
   ('When should a Class 10 student join tuition?', 'As early in the year as you can, because there is more time to fix weak topics. Students can also enquire mid-year. Call us to check which batches have room.'),
   ('Is there a separate batch for SSLC, CBSE and ICSE?', 'Please call us on 097310 45709 for this year\'s batch details. Tell us your child\'s board and subjects, and we will explain how classes work for them.'),
-  ('Can my child try a class first?', 'Yes, a free demo class is available. Call or WhatsApp us and we will fix a convenient time.'),
 ], [(C89, 'Class 8 &amp; 9 Tuition'), (PUC, 'PUC Tuition')])
 
 puc = course_page(PUC, 'PUC Tuition',
@@ -782,7 +783,6 @@ puc = course_page(PUC, 'PUC Tuition',
 ''', [
   ('Do you coach both I PUC and II PUC?', 'Yes, our centre takes PUC students. Subjects and batches can change each year, so please call us on 097310 45709 to confirm what is running now.'),
   ('Will the timings clash with college?', 'Batches are planned around school and college hours. Share your college timing when you call, and we will tell you what fits.'),
-  ('Can I attend a demo class first?', 'Yes, a free demo class is available. Call or WhatsApp us to fix a time.'),
 ], [(C89, 'Class 8 &amp; 9 Tuition'), (C10, 'Class 10 Tuition')])
 
 course_pages = [(C89, class89), (C10, class10), (PUC, puc)]
@@ -790,6 +790,6 @@ course_pages = [(C89, class89), (C10, class10), (PUC, puc)]
 for name, html in [('index.html', index()), ('privacy.html', privacy), ('terms.html', terms), ('disclosures.html', disclosures), ('404.html', nf)] + course_pages:
     open(os.path.join(OUT, name), 'w', encoding='utf-8', newline='\n').write(html)
 open(os.path.join(OUT, 'robots.txt'), 'w', newline='\n').write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n')
-urls = ''.join(f'  <url><loc>{SITE}/{p}</loc><lastmod>2026-11-07</lastmod></url>\n' for p in ['', 'class-8-9-tuition-vijayanagar.html', 'class-10-tuition-vijayanagar.html', 'puc-tuition-vijayanagar.html', 'disclosures.html', 'privacy.html', 'terms.html'])
+urls = ''.join(f'  <url><loc>{SITE}/{p}</loc><lastmod>2026-11-08</lastmod></url>\n' for p in ['', 'class-8-9-tuition-vijayanagar.html', 'class-10-tuition-vijayanagar.html', 'puc-tuition-vijayanagar.html', 'disclosures.html', 'privacy.html', 'terms.html'])
 open(os.path.join(OUT, 'sitemap.xml'), 'w', newline='\n').write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
 print('built')
